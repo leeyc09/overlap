@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">overlap</string>
+
+    <string name="permission_warn">Permission Warning</string>
+    <string name="permission_warn_explanation">The application need this permission to work properly!</string>
+    <string name="permission_warn_overlay_explanation">The application need overlay permission to show pictures!</string>
+    <string name="permission_warn_storage_intent">Please give storage permission!</string>
+    <string name="permission_warn_overlay_intent">Please give overlay permission!</string>
+    <string name="done">done</string>
+    <string name="cancel">cancel</string>
+
+</resources>

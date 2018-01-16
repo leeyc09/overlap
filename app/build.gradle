@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+
+//apply plugin: 'kotlin-android'
+//
+//apply plugin: 'kotlin-android-extensions'
+//
+//apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+    defaultConfig {
+        applicationId "com.shine.overlap"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // Support libraries
+    compile deps.support.app_compat
+//    compile deps.support.v4
+    compile deps.support.design
+    compile deps.support.cardview
+    compile deps.support.recyclerview
+    // Architecture components
+    compile deps.lifecycle.runtime
+    compile deps.lifecycle.extensions
+    annotationProcessor deps.lifecycle.compiler
+    compile deps.room.runtime
+    annotationProcessor deps.room.compiler
+    compile deps.room.rxjava2
+
+    // RxJava
+    compile deps.rx_android
+    compile deps.rxjava2
+
+    // Dependencies for local unit tests
+    testCompile deps.junit
+    testCompile deps.hamcrest
+    testCompile deps.arch_core.testing
+    testCompile deps.mockito.all
+
+    // Resolve conflicts between main and local unit tests
+    testCompile deps.support.annotations
+    testCompile deps.support.core_utils
+
+    // Android Testing Support Library's runner and rules
+    androidTestCompile deps.atsl.runner
+    androidTestCompile deps.atsl.rules
+    androidTestCompile deps.room.testing
+    androidTestCompile deps.arch_core.testing
+
+    // Dependencies for Android unit tests
+    androidTestCompile deps.junit
+    androidTestCompile deps.mockito.core, { exclude group: 'net.bytebuddy' }
+    androidTestCompile deps.dexmaker
+
+    // Espresso UI Testing
+    androidTestCompile deps.espresso.core
+    androidTestCompile deps.espresso.contrib
+    androidTestCompile deps.espresso.intents
+
+    // Resolve conflicts between main and test APK:
+    androidTestCompile deps.support.annotations
+    androidTestCompile deps.support.v4
+    androidTestCompile deps.support.app_compat
+    androidTestCompile deps.support.design
+
+
+    implementation 'com.github.vivchar:RendererRecyclerViewAdapter:2.3.0'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.github.rubengees:introduction:2.0.0'
+
+    implementation "com.google.dagger:dagger:2.14.1"
+    implementation "com.google.dagger:dagger-android:2.14.1"
+    implementation "com.google.dagger:dagger-android-support:2.14.1"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.14.1"
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.14.1"
+
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+}
